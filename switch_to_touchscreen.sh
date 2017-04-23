@@ -2,4 +2,4 @@
 
 cd /boot/
 cd LCD-show/
-sudo ./LCD-hdmi
+sudo ./LCD35-show

@@ -7,10 +7,10 @@ TEMP=0
 while true
 do
 	TEMP="$(cat w1_slave | grep -Eho '[0-9][0-9][0-9][0-9][0-9]')"
-	echo $TEMP
 	CEL="$(echo "scale=2; ${TEMP} / 1000" | bc -l)"
-	echo $CEL
-	sed -i "/TEMP_C/c\<!--TEMP_C-->${CEL}" ~/Desktop/simple_temp/index.html
-	sleep 5
+	FHR="$(echo "scale=2; ${CEL} * (9/5) + 32" | bc -l)"
+	sudo sed -i "/TEMP_C/c\<!--TEMP_C-->${CEL}" /var/www/html/index.html
+	sudo sed -i "/TEMP_F/c\<!--TEMP_F-->${FHR}" /var/www/html/index.html
+	sleep 1
 done
 
